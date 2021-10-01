@@ -1,4 +1,4 @@
-package hyundaimeta.com.comingmapi.configs;
+	package hyundaimeta.com.comingmapi.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,14 +20,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //security 예외 url
+        //security �삁�쇅 url
         http.authorizeRequests()
-                .antMatchers("/api/v1/health").permitAll()
+                .antMatchers(
+                		"/health",
+                		"/swagger*/**",
+                		"/v3/api-docs",
+                		"/auth/signUp",
+                		"/auth/signIn",
+                		"/auth/logout"
+                ).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
 
-        //BCryptPasswordEncoder 관련
+        //BCryptPasswordEncoder 愿��젴
         http.cors().disable()
                 .csrf().disable()
                 .formLogin().disable()

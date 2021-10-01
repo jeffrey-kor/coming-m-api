@@ -13,17 +13,19 @@ create sequence hibernate_sequence start with 1 increment by 1;
 --users--
 drop table if exists coming_m.users;
 create table coming_m.users (
-    user_id                     bigserial not null, 
-    id                          varchar(50) not null,
-    password                    varchar(50) not null, 
-    name                        varchar(50) not null, 
-    indvdlinfo_agre_yn          char not null, 
+    user_id                     bigserial NOT NULL, 
+    id                          varchar(50) NOT NULL,
+    password                    varchar(255) NOT NULL, 
+    name                        varchar(50) NOT NULL, 
+    indvdlinfo_agre_yn          char NOT NULL, 
     indvdlinfo_agre_dt          timestamp NOT NULL DEFAULT now(),
     created_dt                  timestamp NOT NULL DEFAULT now(), 
     updated_dt                  timestamp NOT NULL DEFAULT now(),     
     secsn_yn                    char NOT NULL DEFAULT 'N',
+    profile_id int8 NULL,
     primary key (user_id)
-    CONSTRAINT fk_users_to_profiles FOREIGN KEY (profile_id) REFERENCES profiles(profile_id)
+    CONSTRAINT fk_users_to_profiles FOREIGN KEY (profile_id) REFERENCES
+    CONSTRAINT uk_users_id UNIQUE (id),profiles(profile_id)
 );
 
 CREATE INDEX "IDX_USER_1" ON coming_m.users USING btree (id);

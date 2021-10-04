@@ -1,4 +1,4 @@
-package hyundaimeta.com.comingmapi.configs;
+ package hyundaimeta.com.comingmapi.configs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.session.web.context.AbstractHttpSessionApplicationInitializer;
 
 @Configuration
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 600) /* 세션 만료 시간 : 60초 */
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 600) /* 세션 만료 시간 : 600초 */
 @RequiredArgsConstructor
 public class RedisConfig extends AbstractHttpSessionApplicationInitializer {
     @Value("${spring.redis.host}")

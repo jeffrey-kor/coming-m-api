@@ -11,10 +11,10 @@ create sequence hibernate_sequence start with 1 increment by 1;
 
 
 --users--
-drop table if exists coming_m.users;
-create table coming_m.users (
-    user_id                     bigserial NOT NULL, 
-    id                          varchar(50) NOT NULL,
+drop table if exists coming_m.members;
+create table coming_m.members (
+    members_id                  bigserial NOT NULL, 
+    account                     varchar(50) NOT NULL,
     password                    varchar(255) NOT NULL, 
     name                        varchar(50) NOT NULL, 
     indvdlinfo_agre_yn          char NOT NULL, 
@@ -23,22 +23,22 @@ create table coming_m.users (
     updated_dt                  timestamp NOT NULL DEFAULT now(),     
     secsn_yn                    char NOT NULL DEFAULT 'N',
     profile_id int8 NULL,
-    primary key (user_id)
+    primary key (members_id)
     CONSTRAINT fk_users_to_profiles FOREIGN KEY (profile_id) REFERENCES
-    CONSTRAINT uk_users_id UNIQUE (id),profiles(profile_id)
+    CONSTRAINT uk_users_account UNIQUE (account),profiles(profile_id)
 );
 
-CREATE INDEX "IDX_USER_1" ON coming_m.users USING btree (id);
-CREATE INDEX "IDX_USER_2" ON coming_m.users USING btree (name);
-CREATE INDEX "IDX_USER_3" ON coming_m.users USING btree (id,name);
+CREATE INDEX "IDX_USER_1" ON coming_m.members USING btree (account);
+CREATE INDEX "IDX_USER_2" ON coming_m.members USING btree (name);
+CREATE INDEX "IDX_USER_3" ON coming_m.members USING btree (account,name);
 
-COMMENT ON COLUMN coming_m.users.user_id IS '유저 식별 아이디';
-COMMENT ON COLUMN coming_m.users.id IS '아이디';
-COMMENT ON COLUMN coming_m.users.password IS '비밀번호';
-COMMENT ON COLUMN coming_m.users.name IS '이름';
-COMMENT ON COLUMN coming_m.users.indvdlinfo_agre_yn IS '개인정보 동의여부';
-COMMENT ON COLUMN coming_m.users.indvdlinfo_agre_dt IS '개인정보 동의일자';
-COMMENT ON COLUMN coming_m.users.created_dt IS '생성일';
-COMMENT ON COLUMN coming_m.users.updated_dt IS '수정일';
-COMMENT ON COLUMN coming_m.users.secsn_yn IS '탈퇴여부';
+COMMENT ON COLUMN coming_m.members.members_id IS '유저 식별 아이디';
+COMMENT ON COLUMN coming_m.members.account IS '계정';
+COMMENT ON COLUMN coming_m.members.password IS '비밀번호';
+COMMENT ON COLUMN coming_m.members.name IS '이름';
+COMMENT ON COLUMN coming_m.members.indvdlinfo_agre_yn IS '개인정보 동의여부';
+COMMENT ON COLUMN coming_m.members.indvdlinfo_agre_dt IS '개인정보 동의일자';
+COMMENT ON COLUMN coming_m.members.created_dt IS '생성일';
+COMMENT ON COLUMN coming_m.members.updated_dt IS '수정일';
+COMMENT ON COLUMN coming_m.members.secsn_yn IS '탈퇴여부';
 

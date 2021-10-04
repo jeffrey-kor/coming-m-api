@@ -1,15 +1,13 @@
 package hyundaimeta.com.comingmapi.apis.auth.service;
 
 
-import hyundaimeta.com.comingmapi.apis.auth.dto.LoginDto;
-import hyundaimeta.com.comingmapi.apis.auth.dto.UserCreateDto;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import hyundaimeta.com.comingmapi.apis.auth.dto.MemberCreateDto;
 
 
-public interface AuthService {
+public interface AuthService extends UserDetailsService {
 
-	boolean insertUser(UserCreateDto userCreateDto) throws Exception;
-
-	boolean login(LoginDto loginDto);
-    
+	boolean insertUser(MemberCreateDto memberCreateDto) throws Exception;
 
 }

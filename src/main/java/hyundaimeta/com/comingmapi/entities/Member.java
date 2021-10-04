@@ -17,27 +17,28 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
 @Data
 @Entity
-@Table( name="users",
+@Table( name="members",
         indexes = {
                     @Index(name = "user_index_1",  columnList="name"),
-                    @Index(name = "user_index_2",  columnList="id"),
+                    @Index(name = "user_index_2",  columnList="account"),
                     @Index(name = "user_index_3",  columnList="indvdlinfo_agre_yn")
                   }
 )
-public class User {
+public class Member implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "member_id")
+    private Long memberId;
 
-    @Column(name = "id",columnDefinition = "varchar(50) NOT NULL", unique=true)
-    private String id;
+    @Column(name = "account",columnDefinition = "varchar(50) NOT NULL", unique=true)
+    private String account;
 
     @Column(name = "password",columnDefinition = "varchar(255) NOT NULL")
     private String password;

@@ -10,10 +10,10 @@ import lombok.Data;
 
 @Data
 @ApiModel(description="UserCreateDto")
-public class UserCreateDto {
+public class MemberCreateDto {
 	
-	 @ApiModelProperty(position=1,value="유저 아이디(unique)")
-	 private String id;
+	 @ApiModelProperty(position=1,value="유저 계정(unique)")
+	 private String account;
 
 	 @ApiModelProperty(position=2,value="유저 패스워드")
 	 private String password;

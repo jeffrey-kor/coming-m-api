@@ -1,8 +1,11 @@
 package hyundaimeta.com.comingmapi.handlers;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.security.Principal;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +20,17 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import hyundaimeta.com.comingmapi.repositories.MemberRepository;
 
+//로그인 성공했을때
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
 	@Autowired
     private MemberRepository memberRepository;
-	
+		
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,Authentication authentication) throws IOException, ServletException {
 		String userName = "";
@@ -35,9 +41,23 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             session.setAttribute("role", "none");
         }else {
             User userSpringSecu = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
             session.setAttribute("role", String.valueOf( userSpringSecu.getAuthorities()));
             session.setAttribute("connectedUser" , memberRepository.findByAccount( userSpringSecu.getUsername() ) );
         }
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("status","200");
+		map.put("message","OK");
+
+		response.setStatus(HttpServletResponse.SC_OK);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+        OutputStream out = response.getOutputStream();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writerWithDefaultPrettyPrinter().writeValue(out, map);
+        out.flush();
+		
 	}
 
 }

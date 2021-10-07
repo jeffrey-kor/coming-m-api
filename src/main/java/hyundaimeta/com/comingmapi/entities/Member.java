@@ -63,6 +63,9 @@ public class Member implements Serializable {
 
     @Column(name = "secsn_yn",columnDefinition = "char NOT NULL DEFAULT 'N'")
     private String secsnYn;
+    
+    @Column(name = "role", columnDefinition = "varchar(50) NOT NULL")
+    private String role;
 
     @OneToOne
     @JoinColumn(name = "profile_id")

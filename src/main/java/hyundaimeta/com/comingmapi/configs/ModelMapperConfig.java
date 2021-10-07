@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BeansConfig {
+public class ModelMapperConfig {
 	private final ModelMapper modelMapper = new ModelMapper();
 	
-	 @Bean
+	 	@Bean
 	    public ModelMapper strictMapper(){
 		 	modelMapper.getConfiguration()
 		 		.setMatchingStrategy(MatchingStrategies.STRICT);

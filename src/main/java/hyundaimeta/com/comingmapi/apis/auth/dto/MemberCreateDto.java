@@ -20,8 +20,11 @@ public class MemberCreateDto {
 	 
 	 @ApiModelProperty(position=3,value="유저 이름")
 	 private String name;
+
+	 @ApiModelProperty(position=4,value="유저 권한",allowableValues="ADMIN,MEMBER")
+	 private String role;
 	 
-	 @ApiModelProperty(position=4,value="개인정보 동의여부",allowableValues="Y")
+	 @ApiModelProperty(position=5,value="개인정보 동의여부",allowableValues="Y")
 	 @Pattern(regexp="Y")
 	 private String indvdlinfoAgreYn;
 

@@ -5,11 +5,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import hyundaimeta.com.comingmapi.apis.auth.dto.LoginDto;
 import hyundaimeta.com.comingmapi.apis.auth.dto.MemberCreateDto;
 import hyundaimeta.com.comingmapi.apis.auth.service.AuthService;
 
@@ -22,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import hyundaimeta.com.comingmapi.repositories.MemberRepository;
 import hyundaimeta.com.comingmapi.entities.Member;
 
+
 @Service
 public class AuthServiceImpl implements AuthService {
     
@@ -33,7 +35,8 @@ public class AuthServiceImpl implements AuthService {
     
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    
+    
     @Override
     public boolean insertUser(MemberCreateDto memberCreateDto) {
     	
@@ -62,16 +65,16 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
-
+		
 		Member memberEntity = memberRepository.findByAccount(account);
 		if (memberEntity == null) { 
-			throw new UsernameNotFoundException("user name not founded"); 
+			throw new UsernameNotFoundException("UsernameNotFoundException"); 
 		}
-	
+
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
+		authorities.add(new SimpleGrantedAuthority("ROLE_"+memberEntity.getRole()));
 		
-		 return new User(memberEntity.getAccount(), memberEntity.getPassword(), authorities);
+		return new User(memberEntity.getAccount(), memberEntity.getPassword(), authorities);
 	}
 
 }

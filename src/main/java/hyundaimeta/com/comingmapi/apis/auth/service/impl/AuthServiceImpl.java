@@ -64,9 +64,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
 	@Override
-	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
 		
-		Member memberEntity = memberRepository.findByAccount(account);
+		Member memberEntity = memberRepository.findByLoginId(loginId);
 		if (memberEntity == null) { 
 			throw new UsernameNotFoundException("UsernameNotFoundException"); 
 		}
@@ -74,7 +74,7 @@ public class AuthServiceImpl implements AuthService {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_"+memberEntity.getRole()));
 		
-		return new User(memberEntity.getAccount(), memberEntity.getPassword(), authorities);
+		return new User(memberEntity.getLoginId(), memberEntity.getPassword(), authorities);
 	}
 
 }

@@ -1,7 +1,6 @@
 package hyundaimeta.com.comingmapi.entities;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,30 +19,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table( name="room_info" )
-public class RoomInfo {
+@Table(name="ticket_room")
+public class TicketRoom {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_info_id")
-    private Long roomInfoId;
-
-	@Column(name="title",columnDefinition = "varchar(50) NOT NULL", unique=true)
-	String title;
+    @Column(name = "ticket_room_id")
+    private Long ticketRoomId;
 	
-	@Column(name="open_time",columnDefinition = "date NOT NULL")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date openTime;
-	
-	@Column(name="thumbnail", columnDefinition = "varchar(100) NULL")
-	private String thumbnail;
-	
-	@Column(name="content", columnDefinition = "TEXT NULL")
-	private String content;
-
-	//방 url
-	@Column(name="room_url", columnDefinition="varchar(20) NOT NULL")
-	private String roomUrl;
+	@Column(name = "active_yn",columnDefinition = "char NOT NULL DEFAULT 'Y'")
+	private String activeYn;
 	
 	@Column(name = "created_dt",columnDefinition = "timestamp NOT NULL DEFAULT now()")
     @CreationTimestamp
@@ -56,8 +38,13 @@ public class RoomInfo {
     @UpdateTimestamp
     private LocalDateTime updatedDt;
 	
-	@ManyToOne(targetEntity=EventInfo.class, fetch=FetchType.LAZY)
-	@JoinColumn(name = "event_info_id")
-	private EventInfo eventInfo;
+	@ManyToOne(targetEntity=Ticket.class, fetch=FetchType.LAZY)
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
+	
+	@ManyToOne(targetEntity=RoomInfo.class, fetch=FetchType.LAZY)
+    @JoinColumn(name = "room_info_id")
+    private RoomInfo roomInfo;	
+	
 	
 }

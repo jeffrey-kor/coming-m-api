@@ -104,7 +104,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	try {
     		authFilter.setFilterProcessesUrl("/auth/signIn");
     		authFilter.setAuthenticationManager(this.authenticationManagerBean());
-    		authFilter.setUsernameParameter("account");
+    		authFilter.setUsernameParameter("loginId");
     		authFilter.setPasswordParameter("password");
     		authFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
     		authFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);

@@ -43,7 +43,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             User userSpringSecu = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
             session.setAttribute("role", String.valueOf( userSpringSecu.getAuthorities()));
-            session.setAttribute("connectedUser" , memberRepository.findByAccount( userSpringSecu.getUsername() ) );
+            session.setAttribute("connectedUser" , memberRepository.findByLoginId( userSpringSecu.getUsername() ) );
         }
 		
 		Map<String,Object> map = new HashMap<>();

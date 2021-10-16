@@ -1,7 +1,5 @@
 package hyundaimeta.com.comingmapi.entities;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,9 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -37,22 +32,16 @@ public class Ticket {
 	//회원등급(vip or non-vip)
 	@Column(name="grade",columnDefinition = "varchar(10) NOT NULL")
 	private String grade;
+
+	//입장가능 방호수
+	@Column(name="target_rooms", columnDefinition = "varchar(50) NOT NULL")
+	private String targetRooms;
 	
-	@Column(name = "created_dt",columnDefinition = "timestamp NOT NULL DEFAULT now()")
-    @CreationTimestamp
-    private LocalDateTime createdDt;
-
-    @Column(name = "updated_dt",columnDefinition = "timestamp NOT NULL DEFAULT now()")
-    @UpdateTimestamp
-    private LocalDateTime updatedDt;
-
 	@ManyToOne(targetEntity=Member.class, fetch=FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-	  
-	@OneToOne(targetEntity=EventInfo.class, fetch=FetchType.EAGER)
+
+	@OneToOne(targetEntity=EventInfo.class, fetch=FetchType.LAZY)
 	@JoinColumn(name = "event_info_id")
 	private EventInfo eventInfo;
-	
-	
 }

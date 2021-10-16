@@ -13,7 +13,7 @@ import lombok.Data;
 public class MemberCreateDto {
 	
 	 @ApiModelProperty(position=1,value="유저 계정(unique)")
-	 private String loginId;
+	 private String account;
 
 	 @ApiModelProperty(position=2,value="유저 패스워드")
 	 private String password;

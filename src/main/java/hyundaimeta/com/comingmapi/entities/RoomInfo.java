@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,14 +15,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import lombok.Data;
 
 @Data
 @Entity
-@Table( name="room_info" )
+@Table( name="room_info",
+	   	uniqueConstraints={
+			   @UniqueConstraint(
+					   columnNames={"room_number","room_url"}
+					   )
+		})
 public class RoomInfo {
 	
 	@Id
@@ -43,20 +44,16 @@ public class RoomInfo {
 	
 	@Column(name="content", columnDefinition = "TEXT NULL")
 	private String content;
-
+	
+	//방 호수
+	@Column(name="room_number", columnDefinition = "integer NOT NULL")
+	private Integer roomNumber;
+	
 	//방 url
 	@Column(name="room_url", columnDefinition="varchar(20) NOT NULL")
 	private String roomUrl;
 	
-	@Column(name = "created_dt",columnDefinition = "timestamp NOT NULL DEFAULT now()")
-    @CreationTimestamp
-    private LocalDateTime createdDt;
-
-    @Column(name = "updated_dt",columnDefinition = "timestamp NOT NULL DEFAULT now()")
-    @UpdateTimestamp
-    private LocalDateTime updatedDt;
-	
-	@ManyToOne(targetEntity=EventInfo.class, fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "event_info_id")
 	private EventInfo eventInfo;
 	

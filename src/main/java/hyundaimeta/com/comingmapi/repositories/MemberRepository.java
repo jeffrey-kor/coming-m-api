@@ -9,10 +9,10 @@ import hyundaimeta.com.comingmapi.entities.Member;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    public Member findByLoginId(String loginId); 
-    public List<Member> findByLoginIdLike(String keyword);
+    public Member findByAccount(String account); 
+    public List<Member> findByAccountLike(String keyword);
     public List<Member> findByName(String name); 
     public List<Member> findByNameLike(String keyword);
-    public List<Member> findByLoginIdAndName(String loginId, String name);
+    public List<Member> findByAccountAndName(String account, String name);
 
 }

@@ -68,7 +68,7 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
 		String username = obtainUsername(request);
 		String password = obtainPassword(request);
 		
-		log.info("[LOGIN_REQUEST] [loginId:{}, password:******]",username);
+		log.info("[LOGIN_REQUEST] [account:{}, password:******]",username);
 		
 		if(username == null) username="";
 		if(password == null) password="";

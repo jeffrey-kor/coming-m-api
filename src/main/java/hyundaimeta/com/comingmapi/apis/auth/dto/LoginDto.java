@@ -8,7 +8,7 @@ import lombok.Data;
 @ApiModel(description="LoginDto")
 public class LoginDto {
 	@ApiModelProperty(position=1,value="유저 계정")
-	private String loginId;
+	private String account;
 
 	@ApiModelProperty(position=2,value="유저 패스워드")
 	private String password;

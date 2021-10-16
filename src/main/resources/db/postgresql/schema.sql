@@ -14,7 +14,7 @@ create sequence hibernate_sequence start with 1 increment by 1;
 drop table if exists coming_m.members;
 create table coming_m.members (
     members_id                  bigserial NOT NULL, 
-    login_id                     varchar(50) NOT NULL,
+    account                     varchar(50) NOT NULL,
     password                    varchar(255) NOT NULL, 
     name                        varchar(50) NOT NULL, 
     indvdlinfo_agre_yn          char NOT NULL, 
@@ -25,15 +25,15 @@ create table coming_m.members (
     profile_id int8 NULL,
     primary key (members_id)
     CONSTRAINT fk_users_to_profiles FOREIGN KEY (profile_id) REFERENCES
-    CONSTRAINT uk_users_login_id UNIQUE (login_id),profiles(profile_id)
+    CONSTRAINT uk_users_account UNIQUE (account),profiles(profile_id)
 );
 
-CREATE INDEX "IDX_USER_1" ON coming_m.members USING btree (login_id);
+CREATE INDEX "IDX_USER_1" ON coming_m.members USING btree (account);
 CREATE INDEX "IDX_USER_2" ON coming_m.members USING btree (name);
-CREATE INDEX "IDX_USER_3" ON coming_m.members USING btree (login_id,name);
+CREATE INDEX "IDX_USER_3" ON coming_m.members USING btree (account,name);
 
 COMMENT ON COLUMN coming_m.members.members_id IS '유저 식별 아이디';
-COMMENT ON COLUMN coming_m.members.login_id IS '계정';
+COMMENT ON COLUMN coming_m.members.account IS '계정';
 COMMENT ON COLUMN coming_m.members.password IS '비밀번호';
 COMMENT ON COLUMN coming_m.members.name IS '이름';
 COMMENT ON COLUMN coming_m.members.indvdlinfo_agre_yn IS '개인정보 동의여부';

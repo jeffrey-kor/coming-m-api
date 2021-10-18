@@ -76,7 +76,7 @@ hooks:
   #    timeout: 300
   #    runas: ec2-user
   # During the ApplicationInstall deployment lifecycle event, run the commands
-  #   in the script specified in "location".
+  #   in the script specified in "location"..
   ApplicationStart:
     - location: start.sh
       timeout: 60

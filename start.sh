@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo 'start start.sh'
+echo 'start ./start.sh'
 
 set -xe \
 && sudo rm -rf /home/ec2-user/coming-m-api/* \

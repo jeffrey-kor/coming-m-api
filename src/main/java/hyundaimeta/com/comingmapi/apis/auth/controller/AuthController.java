@@ -1,7 +1,5 @@
 package hyundaimeta.com.comingmapi.apis.auth.controller;
 
-import org.slf4j.Logger; 
-import org.slf4j.LoggerFactory; 
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +21,6 @@ import javax.validation.Valid;
 @Api(tags = {"회원인증 및 회원관리 Api"})
 public class AuthController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-   
-    
     @Autowired 
     AuthServiceImpl authService;
 

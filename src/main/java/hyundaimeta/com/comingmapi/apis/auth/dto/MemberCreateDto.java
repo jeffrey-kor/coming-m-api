@@ -1,7 +1,5 @@
 package hyundaimeta.com.comingmapi.apis.auth.dto;
 
-import java.time.LocalDateTime;
-
 import javax.validation.constraints.Pattern;
 
 import io.swagger.annotations.ApiModel;
